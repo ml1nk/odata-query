@@ -5,11 +5,23 @@
   "license": "MIT",
   "repository": "techniq/odata-query",
   "main": "dist/commonjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/esm/index.mjs",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/esm/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/commonjs/index.js"
+      }
+    }
+  },
   "dependencies": {
     "tslib": "^1.10.0"
   },
@@ -24,7 +36,7 @@
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "tsc -p tsconfig.cjs.json & tsc -p tsconfig.esm.json & tsc -p tsconfig.dts.json & browserify -e src/index-browser.ts -p [ tsify ] -o dist/browser/index.js",
+    "build": "tsc -p tsconfig.cjs.json & (tsc -p tsconfig.esm.json && mv dist/esm/index.js dist/esm/index.mjs) & tsc -p tsconfig.dts.json & browserify -e src/index-browser.ts -p [ tsify ] -o dist/browser/index.js",
     "test": "jest",
     "test-watch": "jest --watchAll",
     "preversion": "npm run build"
