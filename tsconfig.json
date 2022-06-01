@@ -1,11 +1,12 @@
 {
   "include": ["src", "types"],
-  "exclude": ["src/index-browser.ts"],
   "compilerOptions": {
+    "module": "esnext",
+    "outDir": "dist",
     "target": "es5",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
-    "declaration": false,
+    "declaration": true,
     "rootDir": "./src",
     "strict": true,
     "noImplicitAny": true,
